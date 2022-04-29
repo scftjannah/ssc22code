@@ -1,0 +1,61 @@
+import SwiftUI
+
+struct ContentView: View {
+    
+    @State private var theDecision = "unknown"
+    @State var heads = "coin1"
+    @State var tails = "coin2"
+    @State private var decisionData = ""
+    @State var decisionResult = ""
+    @State var answerPic = "unknownResult"
+    @State var defaultChoice = "You will/won't: "
+    
+    var body: some View {
+        HStack {
+            Text("Cats or Tails?")
+                .font(.largeTitle)
+                .padding(.leading, 50)
+                .padding(.top, 75)
+            Spacer()
+        }
+        VStack {
+            Spacer()
+            HStack{
+                Image(answerPic)
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+            }
+            Text(defaultChoice + decisionData)
+                .padding()
+            Spacer()
+            Image(theDecision)
+                .resizable()
+                .scaledToFit()
+                .padding(.all, 5)
+            Spacer()
+            TextField("Your choice: ", text: $decisionData)
+                .font(.headline)
+                .padding(.all, 75)
+            Spacer()
+        }
+        Spacer()
+        HStack {
+            Spacer()
+            Button(action: {
+                let decisionRandom = Int.random(in: 1...2)
+                theDecision = "coin" + String(decisionRandom)
+                answerPic = "result" + String(decisionRandom)
+                }, label: {
+                Text("Tap Me!")
+                    .font(.title)
+                    .padding(.all)
+                    .background(Color.yellow)
+                    .cornerRadius(7.5)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 100)
+            })
+            Spacer()
+        }
+    }
+}
